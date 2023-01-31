@@ -13,13 +13,13 @@ let track_artist = document.querySelector(".track-artist");
 //Documento representa a página da web. Acessando qualquer elemento no html, nós sempre acessamos o objeto documento.
 //Nesta sessão, estamos colocando todos os elementos da página HTML em variáveis.
 
-let playpause_btn = ducoment.querySelector(".playpause-track");
+let playpause_btn = document.querySelector(".playpause-track");
 let next_btn = document.querySelector (".next-track");
 let prev_btn = document.querySelector (".prev-track");
 
-let seek_slider = document.querySelector(".seek-slider");
-let volume_slider = document.querySelector(".volume-slider");
-let current_time = document.querySelector("current-time");
+let seek_slider = document.querySelector(".seek_slider");
+let volume_slider = document.querySelector(".volume_slider");
+let current_time = document.querySelector(".current-time");
 let total_duration = document.querySelector(".total-duration");
 
 let track_index = 0;
@@ -34,21 +34,21 @@ let track_list = [
     {
         name: "Crazy",
         artist: "Aerosmith",
-        image: "image URL",
-        path: "path URL"
+        image: "img/get-a-grip.jpg",
+        path: "music/crazy.mp3"
     },
     {
         name: "Anthem of The Lonely",
-        Artist: "Nine Lashes",
-        image: "Image URL",
-        path: "path URL"
+        artist: "Nine Lashes",
+        image: "img/world-we-view.jpg",
+        path: "music/anthem-of-the-lonely.mp3"
     },
     {
         name: "Don't Stop Me Now",
         artist: "Queen",
-        image: "image URL",
-        path: "path URL"
-    }
+        image: "img/dont-stop-me-now.jpg",
+        path: "music/dont-stop-me-now.mp3"
+    },
 ];
 
 function loadTrack(track_index){
@@ -60,10 +60,12 @@ function loadTrack(track_index){
     curr_track.load();
     //Carrega uma nova faixa.
 
-    track_art.style.backgroundImage = `url( ${track_list[track_index].image})`;
-    track_name.textContent = track_list[track_index].artist;
+    track_art.style.backgroundImage = 
+        "url(" + track_list[track_index].image + ")";
+    track_name.textContent = track_list[track_index].name;
+    track_artist.textContent = track_list[track_index].artist;
     now_playing.textContent =
-    `PLAING ${(track_index + 1)} OF ${track_list.length}`;
+        " PLAYING " + (track_index + 1) + " OF " + track_list.length;
     //Atualiza os detalhes para a nova música que vai entrar.
 
     updateTimer = setInterval(seekUpdate, 1000);
@@ -77,9 +79,9 @@ function loadTrack(track_index){
 }
 
 function random_bg_color(){
-    let red = math.floor(Math.random() * 256) + 64;
-    let green = math.floor(Math.random() * 256) + 64;
-    let blue = math.floor(Math.random() * 256) + 64;
+    let red = Math.floor(Math.random() * 256) + 64;
+    let green = Math.floor(Math.random() * 256) + 64;
+    let blue = Math.floor(Math.random() * 256) + 64;
     //Seleciona um número entre 64 e 256. Valores abaixo de 64 são cores escuras e isso torna menos interessante.
 
     let bgColor = `rgb(${red}, ${green}, ${blue})`;
@@ -102,39 +104,43 @@ function playTrack(){
     curr_track.play();
     isPlaying = true;
 
-    playpause_btn.innerHTML = '<i class"fa fa-pause-circle fa-5x"></i>'
+    playpause_btn.innerHTML = '<i class="fa fa-pause-circle fa-5x"></i>';
 }
 
 function pauseTrack(){
     curr_track.pause();
     isPlaying = false;
 
-    playpause_btn.innerHTML = '<i class="fa fa-play-circle fa-5x"></i>'
+    playpause_btn.innerHTML = '<i class="fa fa-play-circle fa-5x"></i>';
 }
 
-function nextTrack(){
-    if (track_index < track_list.lenght - 1)
+function nextTrack() {
+
+    if (track_index < track_list.length - 1)
     track_index += 1;
     else track_index = 0;
+
     //Caso a playlist chegue ao final, o botão next vai a fazer repetir.
     loadTrack(track_index);
     playTrack();
 }
 
-function prevTrack(){
+function prevTrack() {
+
     if (track_index > 0)
     track_index -= 1;
-    else track_index = track_list.lenght - 1;
+    else track_index = track_list.length - 1;
+
     //Volta para a última música caso a que esteja tocando seja a primeira.
     loadTrack(track_index);
     playTrack();
 }
 
 function seekTo(){
-    seek = curr_track.duration * (seek_slider.value / 100);
+    seekto = curr_track.duration * (seek_slider.value / 100);
     /*Calcula a posição do cursor de mídia pela porcentagem do navegador de
     mídia e busca a duração relativa da faixa.*/
-    curr_track.currentTime = seekTo;
+    curr_track.currentTime = seekto;
     //Seta a posição atual da faixa para a posição do cursor de mídia.
 }
 

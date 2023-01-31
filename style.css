@@ -3,7 +3,7 @@ body{
     transition: background-color .5s;
 }
 
-.container{
+.player{
     height: 95vh;
     display: flex;
     align-items: center;
@@ -12,18 +12,21 @@ body{
 }
 
 .details {
-    height: 95vh;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    margin-top: 25px;
 }
 
 .track-art{
     margin: 25px;
     height: 250px;
     width: 250px;
-    background-image: URL(https://www.zapgrupos.com/grupos/thumb/imgZapGrupos_2403180426440.jpg)
+    background-image: URL(https://www.zapgrupos.com/grupos/thumb/imgZapGrupos_2403180426440.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 15%;
 }
 
 .now-playing{
